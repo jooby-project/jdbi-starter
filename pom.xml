@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.jooby</groupId>
+    <artifactId>modules</artifactId>
+    <version>1.2.2</version>
+  </parent>
+
+  <artifactId>jdbi-starter</artifactId>
+  <groupId>starter.jdbi</groupId>
+  <version>1.0</version>
+
+  <name>jdbi-starter</name>
+
+  <properties>
+    <jooby.version>1.2.2</jooby.version>
+
+    <!-- Startup class -->
+    <application.class>starter.jdbi.App</application.class>
+  </properties>
+
+  <dependencies>
+    <!-- Server -->
+    <dependency>
+      <groupId>org.jooby</groupId>
+      <artifactId>jooby-netty</artifactId>
+    </dependency>
+
+    <!-- Jackson -->
+    <dependency>
+      <groupId>org.jooby</groupId>
+      <artifactId>jooby-jackson</artifactId>
+    </dependency>
+
+    <!-- logging -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+
+    <!-- jdbi -->
+    <dependency>
+      <groupId>org.jooby</groupId>
+      <artifactId>jooby-jdbi3</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jdbi</groupId>
+      <artifactId>jdbi3-sqlobject</artifactId>
+      <version>${jdbi3.version}</version>
+    </dependency>
+
+    <!-- h2 driver -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
+
+    <!-- Tests -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Build fat jar -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
