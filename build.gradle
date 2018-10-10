@@ -1,0 +1,50 @@
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jooby:jooby-gradle-plugin:1+" //group: 'org.jooby', name: 'jooby-gradle-plugin', version: '1.5.1'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'jooby'
+apply plugin: 'application'
+//apply plugin: 'maven'
+
+sourceCompatibility = 8
+targetCompatibility = 8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+mainClassName = "java.starter.jdbi.App"
+
+
+ext {
+    jooby_version = '1.5+'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+dependencies {
+    implementation "org.jooby:modules:$jooby_version"
+    compile "org.jooby:jooby-netty:$jooby_version"
+    compile "org.jooby:jooby-jackson:$jooby_version"
+    compile "org.jooby:jooby-jdbi3:$jooby_version"
+    compile "ch.qos.logback:logback-classic:1+"
+    compile "org.jdbi:jdbi3-sqlobject:3+"
+    compile "com.h2database:h2:1+"
+
+    testCompile "junit:junit:4+"
+    testCompile "io.rest-assured:rest-assured:3+"
+}
+
+/* * We diverge from the default resources structure to adopt the Jooby standard. */
+sourceSets.main.resources {
+    srcDirs = ["conf", "public"]
+}
