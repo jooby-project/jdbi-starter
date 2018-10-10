@@ -22,15 +22,15 @@ public class App extends Jooby {
     use(new Jdbc());
 
     use(new Jdbi3()
-        /** Install SqlObjectPlugin */
-        .doWith(jdbi -> {
-          jdbi.installPlugin(new SqlObjectPlugin());
-        })
-        /** Creates a transaction per request and attach PetRepository */
-        .transactionPerRequest(
-            new TransactionalRequest()
-                .attach(PetRepository.class)
-        )
+            /** Install SqlObjectPlugin */
+            .doWith(jdbi -> {
+              jdbi.installPlugin(new SqlObjectPlugin());
+            })
+            /** Creates a transaction per request and attach PetRepository */
+            .transactionPerRequest(
+                    new TransactionalRequest()
+                            .attach(PetRepository.class)
+            )
     );
 
     /** Create table + pets: */
@@ -38,7 +38,7 @@ public class App extends Jooby {
       Jdbi jdbi = require(Jdbi.class);
       jdbi.useHandle(h -> {
         h.createUpdate("create table pets (id bigint auto_increment, name varchar(255))")
-            .execute();
+                .execute();
 
         PetRepository repo = h.attach(PetRepository.class);
         repo.insert(new Pet(1L, "Lala"));
@@ -62,7 +62,6 @@ public class App extends Jooby {
        */
       get(req -> {
         PetRepository db = require(PetRepository.class);
-
         int start = req.param("start").intValue(0);
         int max = req.param("max").intValue(20);
 
